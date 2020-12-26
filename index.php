@@ -23,31 +23,47 @@
         </thead> 
         <tbody class="file__body">
             <?php
-            $dir = 'C:/Program Files/Ampps/www/FsBrowserPHP/';
-            $scanned_directory = array_slice(scandir($dir), 2);
-            print_r($scanned_directory);
+            include 'function.php';
+            $base = "C:/Program Files/Ampps/www/FsBrowserPHP/";
+            $url = $_SERVER['REQUEST_URI'];
+            $url_components = parse_url($url);
+            $path = "";
+
+            if ($url_components['query']) {
+                parse_str($url_components['query'], $params);
+                if ($params['path']) {
+                    $path = $params['path'];
+                }
+            }
+            $fullFolderPath = $base.$path;
+
+            if (!endsWith($fullFolderPath, "/")) {
+                $fullFolderPath .= "/";
+            }
+            $scanned_directory = array_slice(scandir($fullFolderPath), 2);
 
             foreach ($scanned_directory as $file) {
+                $fullFilePath = $fullFolderPath.$file;
                 print("<tr class='file__body-row'>");
                 print("<td class='file__column'>");
-                if (is_dir($file)) {
+                if (is_dir($fullFilePath)) {
                     print("Directory");
-                } elseif (exif_imagetype($file)) {
+                } elseif (exif_imagetype( $fullFilePath)) {
                     print("Image");
-                } elseif (is_file($file)) {
+                } elseif (is_file($fullFilePath)) {
                     print("File");
                 }
                 print("</td>");
                 print("<td class='file__column'>");
-                if (is_dir($file)) {
-                    print("<a class='file__link' href='?path=/$file'>$file</a>");
+                if (is_dir($fullFilePath)) {
+                    $nextLink = $path."/".$file;
+                    print("<a class='file__link' href='?path=$nextLink'>$file</a>");   
                 } else {
                     print($file);
                 }
                 print("</td>");
-                print("</td>");
                 print("<td class='file__column'>");
-                if (is_file($file)) {
+                if (is_file($fullFilePath)) {
                     print("<button class='btn btn--delete'>Delete</button>");
                 }
                 print("</td>");
@@ -55,9 +71,6 @@
             }
             ?>
         <tbody>
-    </table>
-
-    
-
+    </table>   
 </body>
 </html>
