@@ -1,0 +1,42 @@
+.file {
+  margin: 2rem auto;
+  font-size: 1.25rem;
+  width: 70%;
+
+  &__head {
+    color: $white;
+    background-color: $green;
+    font-weight: 600;
+  }
+
+  &__row,
+  &__column {
+    border: 1px solid $border;
+    border-collapse: collapse;
+    padding: 1rem 1rem;
+  }
+
+  &__column:first-child {
+    width: 20%;
+  }
+
+  &__column:last-child {
+    width: 40%;
+  }
+
+  &__body-row {
+    &:hover {
+      background-color: $row-hover;
+      cursor: pointer;
+    }
+  }
+
+  &__body-row:nth-child(odd) {
+    background-color: $odd-background;
+
+    &:hover {
+        background-color: $row-hover;
+        cursor: pointer;
+      }
+  }
+}
