@@ -42,6 +42,11 @@
             }
         }
 
+        if (isset($_POST["delete_file"])) {
+            $file_name = $_POST["file_name"];
+            unlink($fullFolderPath . $file_name);
+        }
+
         $scanned_directory = array_slice(scandir($fullFolderPath), 2);
     ?>
 
@@ -79,7 +84,10 @@
                     print("</td>");
                     print("<td class='file__column'>");
                     if (is_file($fullFilePath)) {
-                        print("<button class='btn'>Delete</button>");
+                        print("<form method='post' action=''>");
+                        print("<input type='hidden' name='file_name' value='" . $file . "'>");
+                        print("<input type='submit' name='delete_file' class='btn' value='Delete'>");
+                        print("</form>");
                     }
                     print("</td>");
                     print("</tr>");
@@ -90,7 +98,7 @@
         <div class="bottom-wrapper">
             <a href="<?php print($backUrl); ?>"><button class="btn btn--back">Back</button></a>
             <form action="" method="POST" name="createDirectory" class="directory-form">
-                <input type="text" placeholder="Name of new directory" class="directory-form__text" name="directory" id="directory">
+                <input type="text" placeholder="Name of new directory" class="directory-form__text" name="directory">
                 <input type="submit" class="btn btn--create" value="Create">
             </form>
         </div>
