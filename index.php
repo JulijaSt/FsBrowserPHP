@@ -47,6 +47,25 @@
             unlink($fullFolderPath . $file_name);
         }
 
+        if (isset($_GET["file_name"]) and isset($_GET["path"])) {
+            $file_name = $_GET["file_name"];
+            print($fullFolderPath . $file_name);
+            if (file_exists($fullFolderPath . $file_name)) {
+                header('Content-Description: File Transfer');
+                header('Content-Type: application/octet-stream');
+                header("Cache-Control: no-cache, must-revalidate");
+                header("Expires: 0");
+                header('Content-Disposition: attachment; filename="'.basename($file_name).'"');
+                header('Content-Length: ' . filesize($file_name));
+                header('Pragma: public');
+                flush();
+                readfile($file_name);
+                die();
+            } else {
+                print("File does not exist.");
+            }
+        }
+
         $scanned_directory = array_slice(scandir($fullFolderPath), 2);
     ?>
 
@@ -55,9 +74,9 @@
         <table class="file">
             <thead class="file__head">
                 <tr class="file__row">
-                    <th class="file__column">Type</th>
-                    <th class="file__column">Name</th>
-                    <th class="file__column">Actions</th>
+                    <th class="file__column file__column--head">Type</th>
+                    <th class="file__column file__column--head">Name</th>
+                    <th class="file__column file__column--head">Actions</th>
                 </tr>
             </thead> 
             <tbody class="file__body">
@@ -82,11 +101,16 @@
                         print($file);
                     }
                     print("</td>");
-                    print("<td class='file__column'>");
+                    print("<td class='file__column action'>");
                     if (is_file($fullFilePath)) {
-                        print("<form method='post' action=''>");
+                        print("<form method='post' action='' class='file-action'>");
                         print("<input type='hidden' name='file_name' value='" . $file . "'>");
                         print("<input type='submit' name='delete_file' class='btn' value='Delete'>");
+                        print("</form>");
+                        print("<form method='get' action='' class='file-action'>");
+                        print("<input type='hidden' name='file_name' value='" . $file . "'>");
+                        print("<input type='hidden' name='path' value='" . $path . "'>");
+                        print("<input type='submit' name='download_file' class='btn' value='Download'>");
                         print("</form>");
                     }
                     print("</td>");

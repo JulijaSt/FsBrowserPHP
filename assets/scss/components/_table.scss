@@ -25,6 +25,12 @@
     width: 40%;
   }
 
+  &__column {
+    &--head{
+      padding: 0.75rem 1rem 0.25rem;
+    }
+  }
+
   &__body-row {
     &:hover {
       background-color: $row-hover;
@@ -39,5 +45,14 @@
       background-color: $row-hover;
       cursor: pointer;
     }
+  }
+
+  .file-action {
+    display: inline-block;
+    margin-bottom: 0.3rem;
+  }
+
+  .file-action:first-child {
+    margin-right: 2rem;
   }
 }
