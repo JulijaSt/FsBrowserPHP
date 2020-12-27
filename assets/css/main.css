@@ -15,7 +15,7 @@ body {
 }
 
 .bottom-wrapper {
-  width: 30%;
+  width: 35%;
 }
 
 .file {
@@ -97,5 +97,47 @@ body {
 
 .btn--back {
   width: 100%;
+}
+
+.btn--create {
+  border-radius: 0 0.75rem 0.75rem 0;
+}
+
+.directory-form {
+  width: 100%;
+  margin: 1rem 0;
+}
+
+.directory-form__text {
+  width: calc(100% - 94px);
+  padding: 0.15rem 0.5rem 0.1rem;
+  font-size: 1.1rem;
+  border-radius: 0.75rem 0 0 0.75rem;
+  border: 2px solid #000;
+}
+
+.directory-form__text::-webkit-input-placeholder {
+  font-size: 1.1rem;
+}
+
+.directory-form__text:-ms-input-placeholder {
+  font-size: 1.1rem;
+}
+
+.directory-form__text::-ms-input-placeholder {
+  font-size: 1.1rem;
+}
+
+.directory-form__text::placeholder {
+  font-size: 1.1rem;
+}
+
+.directory-form__text:focus {
+  outline: 1px solid #429645;
+  border: 2px solid #429645;
+}
+
+.directory-form__text:hover {
+  border: 2px solid #429645;
 }
 /*# sourceMappingURL=main.css.map */

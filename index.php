@@ -35,6 +35,13 @@
             $fullFolderPath .= "/";
         }
 
+        if (isset($_POST["directory"])) {
+            $directory_name = $_POST["directory"];
+            if (!file_exists($fullFolderPath . $directory_name)) {
+                @mkdir($fullFolderPath . $directory_name, 0777);
+            }
+        }
+
         $scanned_directory = array_slice(scandir($fullFolderPath), 2);
     ?>
 
@@ -82,6 +89,10 @@
         </table>
         <div class="bottom-wrapper">
             <a href="<?php print($backUrl); ?>"><button class="btn btn--back">Back</button></a>
+            <form action="" method="POST" name="createDirectory" class="directory-form">
+                <input type="text" placeholder="Name of new directory" class="directory-form__text" name="directory" id="directory">
+                <input type="submit" class="btn btn--create" value="Create">
+            </form>
         </div>
     </div>
 </body>
