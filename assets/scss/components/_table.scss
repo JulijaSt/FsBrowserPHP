@@ -1,7 +1,7 @@
 .file {
-  margin: 2rem auto;
   font-size: 1.25rem;
-  width: 70%;
+  width: 100%;
+  margin-bottom: 2rem;
 
   &__head {
     color: $white;
@@ -13,7 +13,8 @@
   &__column {
     border: 1px solid $border;
     border-collapse: collapse;
-    padding: 1rem 1rem;
+    padding: 0.7rem 1rem 0.25rem;
+    height: 3rem;
   }
 
   &__column:first-child {
@@ -35,8 +36,8 @@
     background-color: $odd-background;
 
     &:hover {
-        background-color: $row-hover;
-        cursor: pointer;
-      }
+      background-color: $row-hover;
+      cursor: pointer;
+    }
   }
 }
