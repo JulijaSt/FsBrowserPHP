@@ -13,8 +13,8 @@
         if ($params['path']) {
             $mainDirectory = "/" . basename(getcwd());
             $path = $params['path'];
-            $splitUrl = explode("%", $url, -1);
-            $backUrl = join("%", $splitUrl);
+            $splitUrl = explode("/", $url, -1);
+            $backUrl = join("/", $splitUrl);
         }
     }
 
@@ -84,17 +84,20 @@
                 print("<td class='file__column'>");
                 if (is_dir($fullFilePath)) {
                     $nextLink = $path."/".$file;
-                    print("<a class='file__link' href='?path=" . urlencode($nextLink) . "'>$file</a>");   
+                    print("<a class='file__link' href='?path=" . str_replace('%2F', '/', urlencode($nextLink))  . "'>$file</a>");   
                 } else {
                     print($file);
                 }
                 print("</td>");
                 print("<td class='file__column action'>");
                 if (is_file($fullFilePath)) {
-                    print("<form method='post' action='' class='file-action'>");
-                    print("<input type='hidden' name='file_name' value='" . $file . "'>");
-                    print("<input type='submit' name='delete_file' class='btn' value='Delete'>");
-                    print("</form>");
+                    $file_parts = pathinfo($file);
+                    if ($file_parts["extension"] != "php") {
+                        print("<form method='post' action='' class='file-action'>");
+                        print("<input type='hidden' name='file_name' value='" . $file . "'>");
+                        print("<input type='submit' name='delete_file' class='btn' value='Delete'>");
+                        print("</form>");
+                    }
                     print("<form method='get' action='' class='file-action'>");
                     print("<input type='hidden' name='file_name' value='" . $file . "'>");
                     print("<input type='hidden' name='path' value='" . $path . "'>");
