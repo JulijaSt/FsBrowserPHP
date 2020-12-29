@@ -39,16 +39,20 @@
     if (isset($_GET["file_name"]) and isset($_GET["path"])) {
         $file_name = $_GET["file_name"];
         if (file_exists($fullFolderPath . $file_name)) {
+            $fileToDownloadEscaped = str_replace("&nbsp;", " ", htmlentities($file_name, null, 'utf-8'));
+            ob_clean();
+            ob_start();
             header('Content-Description: File Transfer');
-            header('Content-Type: application/octet-stream');
-            header("Cache-Control: no-cache, must-revalidate");
-            header("Expires: 0");
-            header('Content-Disposition: attachment; filename="'.basename($file_name).'"');
-            header('Content-Length: ' . filesize($file_name));
+            header('Content-Type: application/pdf');
+            header('Content-Disposition: attachment; filename=' . basename($fileToDownloadEscaped));
+            header('Content-Transfer-Encoding: binary');
+            header('Expires: 0');
+            header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
             header('Pragma: public');
-            flush();
-            readfile($file_name);
-            die();
+            header('Content-Length: ' . filesize($fileToDownloadEscaped));
+            ob_end_flush();
+            readfile($fileToDownloadEscaped);
+            exit;
         } else {
             print("File does not exist.");
         }
