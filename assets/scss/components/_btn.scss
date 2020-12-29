@@ -22,8 +22,23 @@
     color: $white;
   }
 
-  &--back {
+  &--back,
+  &--upload,
+  &--choose {
     width: 100%;
+    position: relative;
+    z-index: 1;
+  }
+
+  &--choose,
+  &--upload {
+    &:hover {
+      z-index: 2;
+    }
+  }
+
+  &--back {
+    margin-bottom: 1rem;
   }
 
   &--create {

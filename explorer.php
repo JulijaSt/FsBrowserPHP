@@ -58,6 +58,27 @@
         }
     }
 
+    if(isset($_FILES['upload'])){
+        $errors= array();
+        $file_name = $_FILES['upload']['name'];
+        $file_size = $_FILES['upload']['size'];
+        $file_tmp = $_FILES['upload']['tmp_name'];
+        $file_type = $_FILES['upload']['type'];
+
+        $file_ext = strtolower(end(explode('.',$_FILES['upload']['name'])));
+        $extensions = array("jpeg","jpg","png");
+        if(!in_array($file_ext,$extensions)){
+            $errors[]="Extension not allowed, please choose a JPEG or PNG file. ";
+        }
+        if($file_size > 2097152) {
+            $errors[]="File size must be exactly 2 MB. ";
+        }
+        if(empty($errors)) {
+            move_uploaded_file($file_tmp, $fullFolderPath . $file_name);
+        }
+    }
+
+
     $scanned_directory = array_slice(scandir($fullFolderPath), 2); 
 ?>
 
@@ -88,7 +109,7 @@
                 print("<td class='file__column'>");
                 if (is_dir($fullFilePath)) {
                     $nextLink = $path."/".$file;
-                    print("<a class='file__link' href='?path=" . str_replace('%2F', '/', urlencode($nextLink))  . "'>$file</a>");   
+                    print("<a class='reference' href='?path=" . str_replace('%2F', '/', urlencode($nextLink))  . "'>$file</a>");   
                 } else {
                     print($file);
                 }
@@ -116,10 +137,24 @@
     </table>
     <div class="bottom-wrapper">
         <a href="<?php print($backUrl); ?>"><button class="btn btn--back">Back</button></a>
+        <form action="" method="POST"  class="upload-form" enctype="multipart/form-data">
+            <label for="input-file" class="btn btn--upload label">Choose file</label>
+            <input type="file" class="upload-form__input" name="upload" id="input-file">
+            <input type="submit" class="btn btn--upload" value="Upload file">
+            <span class="upload-error">
+                <?php
+                    if ($errors) {
+                        foreach ($errors as $err) {
+                            print($err);
+                        }
+                    } 
+                ?>
+             </span>
+        </form>
         <form action="" method="POST" name="createDirectory" class="directory-form">
             <input type="text" placeholder="Name of new directory" class="directory-form__text" name="directory">
             <input type="submit" class="btn btn--create" value="Create">
         </form>
-        <p class="logout">Click here to <a href = "index.php?action=logout"> logout.</a></p>
+        <p class="logout">Click here to <a class="reference" href = "index.php?action=logout"> logout.</a></p>
     </div>
 </div>

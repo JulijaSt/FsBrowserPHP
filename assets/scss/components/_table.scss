@@ -13,8 +13,8 @@
   &__column {
     border: 1px solid $border;
     border-collapse: collapse;
-    padding: 0.7rem 1rem 0.25rem;
-    height: 3rem;
+    padding: 0.7rem 1rem;
+    vertical-align: middle;
   }
 
   &__column:first-child {
@@ -23,12 +23,6 @@
 
   &__column:last-child {
     width: 40%;
-  }
-
-  &__column {
-    &--head{
-      padding: 0.75rem 1rem 0.25rem;
-    }
   }
 
   &__body-row {
@@ -49,10 +43,19 @@
 
   .file-action {
     display: inline-block;
-    margin-bottom: 0.3rem;
   }
 
   .file-action:first-child {
     margin-right: 2rem;
+  }
+}
+
+.reference {
+  color: $green;
+  text-decoration: none;
+  font-weight: 500;
+
+  &:hover {
+    color: $btn-focus;
   }
 }
