@@ -1,4 +1,4 @@
-# <img src="File_Browser_System.png" style="transform:scaleX(-1); width:50px"> File Browsing System <img src="File_Browser_System.png" width="50" >
+# File Browsing System <img src="File_Browser_System.png" width="50" >
 
 This is my first Back-end project created to learn and master the basics of PHP.
 
@@ -8,7 +8,7 @@ The following technologies were used for this project: **PHP 7.3**, **HTML** and
 
 &nbsp;
 
-# <img src="How_to_run.png" width="50"> How to run  <img src="How_to_run.png"  style="transform:scaleX(-1); width:50px">
+# <img src="How_to_run.png" width="50"> How to run
 
 1.	Install xampp/wamp/ampps.
 
@@ -16,7 +16,7 @@ The following technologies were used for this project: **PHP 7.3**, **HTML** and
 
 3.	Run xampp/wamp/ampps.
 
-4.	Go to browser using this link: `http://localhost/`**mydirectory**`/`
+4.	Go to browser using this link: `http://localhost/mydirectory/`
 
 5.	Login using the following credentials:
 
