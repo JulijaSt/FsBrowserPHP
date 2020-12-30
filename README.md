@@ -21,7 +21,7 @@ The following technologies were used for this project: **PHP 7.3**, **HTML** and
 5.	Login using the following credentials:
 
 ```
-    Username: Login
+    Username: admin
     Password: 1234
 ```
 

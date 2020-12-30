@@ -120,7 +120,7 @@
                     if ($file_parts["extension"] != "php") {
                         print("<form method='post' action='' class='file-action'>");
                         print("<input type='hidden' name='file_name' value='" . $file . "'>");
-                        print("<input type='submit' name='delete_file' class='btn' value='Delete'>");
+                        print('<input type="submit" name="delete_file" class="btn" value="Delete" onclick="return confirm(\'Are you sure you want to delete this file?\')" />');
                         print("</form>");
                     }
                     print("<form method='get' action='' class='file-action'>");
