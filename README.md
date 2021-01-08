@@ -4,7 +4,7 @@ This is my first Back-end project created to learn and master the basics of PHP.
 
 ‘‘File Browsing System“ is a simple webpage which allows you to walk through local directories or create them. Also you can download, delete or upload file located on your computer. To see the files and directories it is necessary to log in.
 
-The following technologies were used for this project: **PHP 7.3**, **HTML** and **SASS**.
+The following technologies I used for this project: **PHP 7.3**, **HTML** and **SASS**.
 
 &nbsp;
 
